@@ -1,0 +1,203 @@
+
+
+export const SEED_USERS = [
+    {
+      userId: "admin001",
+      name: "Alice Admin",
+      email: "alice@app.com",
+      password: "admin123",
+      role: "Admin" as const,
+    },
+    {
+      userId: "admin002",
+      name: "Alan Operations",
+      email: "cd@app.com",
+      password: "admin123",
+      role: "Admin" as const,
+    },
+    {
+      userId: "user001",
+      name: "Bob Engineer",
+      email: "bob@app.com",
+      password: "user123",
+      role: "General User" as const,
+    },
+    {
+      userId: "user002",
+      name: "Carol Sales",
+      email: "carol@app.com",
+      password: "user123",
+      role: "General User" as const,
+    },
+    {
+      userId: "user003",
+      name: "David HR",
+      email: "david@app.com",
+      password: "user123",
+      role: "General User" as const,
+    },
+    {
+      userId: "user004",
+      name: "Eva Finance",
+      email: "eva@app.com",
+      password: "user123",
+      role: "General User" as const,
+    },
+  ];
+  
+  export const RECORD_TEMPLATES = [
+    {
+      title: "Implement OAuth2 Login",
+      description:
+        "Set up OAuth2 with Google and GitHub providers for the main app.",
+      status: "Active" as const,
+      priority: "High" as const,
+      category: "Engineering",
+      tags: ["auth", "sprint-1"],
+      progress: 65,
+    },
+    {
+      title: "Q4 Revenue Dashboard",
+      description: "Build an interactive revenue dashboard for the finance team.",
+      status: "Pending" as const,
+      priority: "Critical" as const,
+      category: "Finance",
+      tags: ["dashboard", "q4"],
+      progress: 20,
+    },
+    {
+      title: "Onboard 3 New Sales Clients",
+      description:
+        "Complete onboarding documents and first call for Q4 pipeline.",
+      status: "Active" as const,
+      priority: "High" as const,
+      category: "Sales",
+      tags: ["clients", "q4"],
+      progress: 40,
+    },
+    {
+      title: "Database Migration v3",
+      description: "Migrate legacy MySQL tables to MongoDB with zero downtime.",
+      status: "Pending" as const,
+      priority: "Critical" as const,
+      category: "Engineering",
+      tags: ["db", "migration"],
+      progress: 10,
+    },
+    {
+      title: "Performance Audit",
+      description:
+        "Run Lighthouse and bundle analyser; reduce JS payload by 30%.",
+      status: "Closed" as const,
+      priority: "Medium" as const,
+      category: "Engineering",
+      tags: ["perf", "audit"],
+      progress: 100,
+    },
+    {
+      title: "Redesign Landing Page",
+      description:
+        "Refresh hero section, update brand colours and improve CTA copy.",
+      status: "Active" as const,
+      priority: "Medium" as const,
+      category: "Design",
+      tags: ["brand", "ux"],
+      progress: 55,
+    },
+    {
+      title: "HR Policy Update FY25",
+      description: "Update leave policies and remote-work guidelines for FY2025.",
+      status: "Pending" as const,
+      priority: "Low" as const,
+      category: "HR",
+      tags: ["policy", "fy25"],
+      progress: 5,
+    },
+    {
+      title: "API Rate Limiting",
+      description: "Add Redis-backed rate limiting to all public API endpoints.",
+      status: "Active" as const,
+      priority: "High" as const,
+      category: "Engineering",
+      tags: ["security", "api"],
+      progress: 80,
+    },
+    {
+      title: "Mobile App — iOS Beta",
+      description:
+        "Internal beta distribution via TestFlight. Fix crash on iOS 16.",
+      status: "Active" as const,
+      priority: "Critical" as const,
+      category: "Engineering",
+      tags: ["mobile", "ios"],
+      progress: 72,
+    },
+    {
+      title: "Annual Sales Report",
+      description:
+        "Compile YoY analysis and prepare slides for board presentation.",
+      status: "Archived" as const,
+      priority: "Medium" as const,
+      category: "Sales",
+      tags: ["report", "annual"],
+      progress: 100,
+    },
+    {
+      title: "Security Patch — CVE-2024-001",
+      description: "Apply upstream patch and verify all staging tests pass.",
+      status: "Closed" as const,
+      priority: "Critical" as const,
+      category: "Engineering",
+      tags: ["security", "patch"],
+      progress: 100,
+    },
+    {
+      title: "Staff Training — GDPR",
+      description: "Run 90-min GDPR awareness session for all departments.",
+      status: "Pending" as const,
+      priority: "Medium" as const,
+      category: "HR",
+      tags: ["gdpr", "training"],
+      progress: 0,
+    },
+    {
+      title: "Finance Reconciliation — Oct",
+      description:
+        "Monthly bank reconciliation and variance analysis for October.",
+      status: "Closed" as const,
+      priority: "High" as const,
+      category: "Finance",
+      tags: ["reconcile", "oct"],
+      progress: 100,
+    },
+    {
+      title: "Dark Mode — Web App",
+      description:
+        "Implement system-preference-aware dark mode across all screens.",
+      status: "Active" as const,
+      priority: "Low" as const,
+      category: "Engineering",
+      tags: ["ui", "theme"],
+      progress: 35,
+    },
+    {
+      title: "Partner Integration — Stripe",
+      description:
+        "Wire up Stripe Checkout and webhook for subscription billing.",
+      status: "Active" as const,
+      priority: "High" as const,
+      category: "Engineering",
+      tags: ["payments", "stripe"],
+      progress: 60,
+    },
+    {
+      title: "Social Media Campaign — Nov",
+      description:
+        "LinkedIn + Twitter drip campaign for product launch in November.",
+      status: "Pending" as const,
+      priority: "Medium" as const,
+      category: "Sales",
+      tags: ["social", "launch"],
+      progress: 15,
+    },
+  ];

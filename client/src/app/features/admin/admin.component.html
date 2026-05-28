@@ -1,0 +1,104 @@
+
+
+<div class="flex min-h-screen bg-[#f8fafc] text-slate-800 antialiased">
+  <div class="flex-1 flex flex-col overflow-hidden min-w-0">
+
+    <app-admin-header [user]="user"></app-admin-header>
+
+    <div class="flex-1 overflow-y-auto p-8">
+      <app-admin-tabs
+        [activeTab]="activeTab"
+        (tabChange)="setTab($event)">
+      </app-admin-tabs>
+
+      <app-admin-stats
+        [totalUsers]="totalUsers"
+        [activeUsers]="activeUsers"
+        [adminCount]="adminCount"
+        [totalRecords]="totalRecords">
+      </app-admin-stats>
+
+      <div class="flex items-center gap-3 bg-red-50 border border-red-100 rounded-xl px-5 py-3.5 mb-6 text-sm text-red-800" *ngIf="error">
+        <i class="ti ti-alert-circle text-base text-red-600"></i>
+        <span class="font-medium">{{ error }}</span>
+      </div>
+
+      <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-xl px-5 py-3.5 mb-6 text-sm text-emerald-800" *ngIf="successMessage">
+        <i class="ti ti-circle-check text-base text-emerald-600"></i>
+        <span class="font-medium">{{ successMessage }}</span>
+      </div>
+
+      <app-users-section
+  *ngIf="activeTab === 'users'"
+  [users]="users"
+  [usersLoading]="usersLoading"
+  [currentUser]="user"
+  [getInitials]="getInitials"
+  (addUser)="openAddModal()"
+  (editUser)="openEditModal($event)"
+  (deleteUser)="confirmDelete($event)">
+</app-users-section>
+
+      <app-records-section
+        *ngIf="activeTab === 'records'"
+        [filteredRecords]="filteredRecords"
+        [recordsLoading]="recordsLoading"
+        [userFilterOptions]="userFilterOptions"
+        [filterUserId]="filterUserId"
+        [statusOptions]="statusOptions"
+        [priorityOptions]="priorityOptions"
+        [categoryOptions]="categoryOptions"
+        (filterChange)="applyFilter($event)"
+        (addRecord)="openAddRecordModal()"
+        (deleteRecord)="confirmDeleteRecord($event)"
+        [getAssignedName]="getAssignedName"
+        [getInitials]="getInitials"
+        [getProgressColor]="getProgressColor"
+        [isOverdue]="isOverdue">
+      </app-records-section>
+
+      <button
+        (click)="logout()"
+        class="mt-6 px-6 py-2.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 transition-colors duration-150 cursor-pointer hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+        Sign out
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-user-modal
+  [showModal]="showModal"
+  [editingUser]="editingUser"
+  [userForm]="userForm"
+  [modalLoading]="modalLoading"
+  (close)="closeModal()"
+  (save)="saveUser()">
+</app-user-modal>
+
+<app-delete-user-confirm
+  [showDeleteConfirm]="showDeleteConfirm"
+  [userToDelete]="userToDelete"
+  [modalLoading]="modalLoading"
+  (close)="showDeleteConfirm = false"
+  (confirm)="deleteUser()">
+</app-delete-user-confirm>
+
+<app-record-modal
+  [showRecordModal]="showRecordModal"
+  [recordForm]="recordForm"
+  [recordModalLoading]="recordModalLoading"
+  [userFilterOptions]="userFilterOptions"
+  [statusOptions]="statusOptions"
+  [priorityOptions]="priorityOptions"
+  [categoryOptions]="categoryOptions"
+  (close)="closeRecordModal()"
+  (save)="saveRecord()">
+</app-record-modal>
+
+<app-delete-record-confirm
+  [showDeleteRecordConfirm]="showDeleteRecordConfirm"
+  [recordToDelete]="recordToDelete"
+  [recordModalLoading]="recordModalLoading"
+  (close)="showDeleteRecordConfirm = false"
+  (confirm)="deleteRecord()">
+</app-delete-record-confirm>

@@ -1,0 +1,182 @@
+<div class="flex min-h-screen bg-[#f8fafc] text-slate-800 antialiased">
+  <div class="flex-1 flex flex-col overflow-hidden min-w-0">
+
+    <div class="h-16 bg-white rounded-3xl border-slate-200/80 flex items-center justify-between px-8 flex-shrink-0">
+      <div class="text-sm font-medium text-slate-500 tracking-wide">
+        Dashboard / <span class="text-slate-900 font-semibold">Records</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 uppercase tracking-wider">
+          {{ user?.name }}
+        </span>
+
+      </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-8">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+          <div class="text-[32px] font-semibold text-slate-900 tracking-tight leading-none">
+            {{ records.length }}
+          </div>
+          <div class="text-xs font-semibold uppercase tracking-wider mt-2.5 text-slate-600">
+            Total Records
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+          <div class="text-[32px] font-semibold text-slate-900 tracking-tight leading-none">
+            {{ activeCount }}
+          </div>
+          <div class="text-xs font-semibold uppercase tracking-wider mt-2.5 text-slate-600">
+            Active
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+          <div class="text-[32px] font-semibold text-slate-900 tracking-tight leading-none">
+            {{ pendingCount }}
+          </div>
+          <div class="text-xs font-semibold uppercase tracking-wider mt-2.5 text-slate-600">
+            Pending
+          </div>
+        </div>
+      
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+          <div class="text-[32px] font-semibold text-slate-900 tracking-tight leading-none">
+            {{ archivedCount }}
+          </div>
+          <div class="text-xs font-semibold uppercase tracking-wider mt-2.5 text-slate-600">
+            Archived
+          </div>
+        </div>
+      
+      </div>
+      <div class="flex items-center gap-3 bg-red-50 border border-red-100 rounded-xl px-5 py-3.5 mb-6 text-sm text-red-800" *ngIf="error">
+        <i class="ti ti-alert-circle text-base "></i>
+        <span class="font-medium">{{ error }}</span>
+      </div>
+
+      <div class="w-full flex justify-center">
+        <div class="bg-white rounded-2xl border border-slate-200/70 overflow-hidden mb-8 w-full max-w-6xl mx-auto custom-dashboard-table shadow-sm">
+          
+          <div class="px-6 py-[18px] bg-slate-50/50 border-b border-slate-200/60 flex items-center justify-between flex-wrap gap-3">
+            <span class="font-bold text-sm text-slate-800 uppercase tracking-wider">Assigned records</span>
+            <span class="text-xs bg-slate-200/60 px-2.5 py-1 rounded text-slate-600 font-semibold tracking-tight">
+              {{ records.length }} ITEMS
+            </span>
+          </div>
+      
+          <div class="w-full">
+            <p-table 
+              [value]="loading ? skeletonRows : records" 
+              stripedRows 
+              [tableStyle]="{ 'min-width': '50rem' }"
+              styleClass="p-datatable-sm">
+              
+              <ng-template #header>
+                <tr>
+                  <th class="text-left px-4 py-3.5 bg-slate-50 font-bold text-slate-500 border-b border-slate-200 text-[11px] uppercase tracking-wider">Title</th>
+                  <th class="text-left px-4 py-3.5 bg-slate-50 font-bold text-slate-500 border-b border-slate-200 text-[11px] uppercase tracking-wider whitespace-nowrap">Status</th>
+                  <th class="text-left px-4 py-3.5 bg-slate-50 font-bold text-slate-500 border-b border-slate-200 text-[11px] uppercase tracking-wider whitespace-nowrap">Priority</th>
+                  <th class="text-left px-4 py-3.5 bg-slate-50 font-bold text-slate-500 border-b border-slate-200 text-[11px] uppercase tracking-wider">Progress</th>
+                  <th class="text-left px-4 py-3.5 bg-slate-50 font-bold text-slate-500 border-b border-slate-200 text-[11px] uppercase tracking-wider whitespace-nowrap">Due date</th>
+                </tr>
+              </ng-template>
+      
+              <ng-template #body let-r>
+                <tr *ngIf="loading" class="border-b border-slate-100">
+                  <td class="px-4 py-4 align-middle">
+                    <p-skeleton width="75%" height="1rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="45%" height="0.75rem"></p-skeleton>
+                  </td>
+                  <td class="px-4 py-4 align-middle">
+                    <p-skeleton width="55px" height="20px" borderRadius="4px"></p-skeleton>
+                  </td>
+                  <td class="px-4 py-4 align-middle">
+                    <p-skeleton width="55px" height="20px" borderRadius="4px"></p-skeleton>
+                  </td>
+                  <td class="px-4 py-4 align-middle">
+                    <div class="flex items-center gap-2">
+                      <p-skeleton width="80px" height="5px" borderRadius="9999px"></p-skeleton>
+                      <p-skeleton width="24px" height="10px"></p-skeleton>
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-middle">
+                    <p-skeleton width="75px" height="1rem"></p-skeleton>
+                  </td>
+                 </tr>
+
+                <tr *ngIf="!loading" class="border-b border-slate-100/70 text-slate-700">
+                  <td class="px-4 py-4 align-middle">
+                    <div class="font-semibold text-slate-900 leading-snug text-[13.5px]">{{ r.title }}</div>
+                    <div class="text-[11px] font-medium text-slate-400 mt-0.5 tracking-normal">{{ r.category }}</div>
+                   </td>
+      
+                  <td class="px-4 py-4 align-middle whitespace-nowrap">
+                    <span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-[10.5px] font-semibold uppercase tracking-wider min-w-[65px] text-center"
+                      [ngClass]="{
+                        'bg-emerald-50  border border-emerald-200/50': r.status.toLowerCase() === 'active',
+                        'bg-amber-50  border border-amber-200/50': r.status.toLowerCase() === 'pending',
+                        'bg-slate-100  border border-slate-200/60': r.status.toLowerCase() === 'archived'
+                      }">
+                      {{ r.status }}
+                    </span>
+                   </td>
+      
+                  <td class="px-4 py-4 align-middle whitespace-nowrap">
+                    <span class="inline-flex items-center justify-center px-2 py-0.5 rounded text-[10.5px] font-bold uppercase tracking-wider min-w-[65px] text-center"
+                      [ngClass]="{
+                        'bg-red-50  border-red-100': r.priority.toLowerCase() === 'high',
+                        'bg-amber-50  border-amber-200/50': r.priority.toLowerCase() === 'medium',
+                        'bg-emerald-50  border border-emerald-200/40': r.priority.toLowerCase() === 'low',
+                        'bg-slate-800 text-slate-100': r.priority.toLowerCase() === 'critical'
+                      }">
+                      {{ r.priority }}
+                    </span>
+                   </td>
+      
+                  <td class="px-4 py-4 align-middle">
+                    <div class="flex items-center gap-2">
+                      <div class="w-24 bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200/30">
+                        <div class="h-1.5 rounded-full transition-all duration-500 ease-out"
+                          [style.width.%]="r.progress"
+                          [style.background]="getProgressColor(r.progress, r.status)">
+                        </div>
+                      </div>
+                      <span class="text-[11px] font-bold text-slate-500 tabular-nums">{{ r.progress }}%</span>
+                    </div>
+                   </td>
+      
+                  <td class="px-4 py-4 align-middle whitespace-nowrap text-[12.5px] font-medium text-slate-600">
+                    <span [ngClass]="isOverdue(r.dueDate) ? 'text-orange-600 bg-orange-50 px-2 py-0.5 rounded border border-orange-100 font-semibold' : ''">
+                      {{ r.dueDate | date:'d MMM yyyy' }}
+                    </span>
+                   </td>
+                 </tr>
+              </ng-template>
+
+              <ng-template #emptymessage>
+                <tr>
+                  <td colspan="5" class="text-center py-14 text-sm font-sans text-slate-400 bg-white tracking-wide">
+                    No matching records discovered.
+                  </td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+          </div>
+        </div>
+      </div>
+
+      <button
+        (click)="logout()"
+        class="mt-6 px-6 py-2.5 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 transition-colors duration-150 cursor-pointer hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+        Sign out
+      </button>
+
+    </div>
+  </div>
+</div>
