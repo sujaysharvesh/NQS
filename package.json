@@ -36,7 +36,8 @@
   "scripts": {
     "frontend": "cd client && ng serve",
     "backend": "cd server && npm run dev",
-    "start": "concurrently \"npm run frontend\" \"npm run backend\""
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "install-all": "cd client && npm install && cd ../server && npm install"
   },
   "keywords": [],
   "author": "",
